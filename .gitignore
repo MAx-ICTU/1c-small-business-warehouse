@@ -1,22 +1,8 @@
-# 1C file DB and runtime files
-1Cv8.1CD
-1Cv8.1CL
-1Cv8.cgr
-1Cv8snc.1CD
-1Cv8snc.1CL
-1Cv8tmp.1CD
-1Cv8tmp.1CL
-1Cv8JobScheduler/
-1Cv8Log/
-*.lgf
-*.lgp
-*.cfl
-*.1CL.cfl
-*.1CD.cfl
-
-# Local tooling caches/artifacts
-_tools/
-
-# OS/editor noise
-.DS_Store
-Thumbs.db
+# Documentation-only snapshot for GitHub
+*
+!.gitignore
+!README.md
+!DEMO_SCENARIO.md
+!PORTFOLIO_RUNBOOK.md
+!docs/
+!docs/**

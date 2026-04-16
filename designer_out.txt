@@ -1,1 +1,0 @@
-﻿Исключение XDTO произошло при чтении файла- D:\1cProject\1c-small-business-warehouse\cf-src\Reports\ПродажиЗаПериод\Templates\ОсновнаяСхема\Ext\Template.xml.
