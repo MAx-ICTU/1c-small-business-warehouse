@@ -6,12 +6,12 @@
 - Этап 3: `COMPLETED`
 - Этап 4: `COMPLETED`
 - Этап 5: `COMPLETED`
-- Этап 6: `IN_PROGRESS`
-- Этап 7: `IN_PROGRESS`
-- Этап 8: `IN_PROGRESS`
-- Этап 9: `PLANNED`
-- Этап 10: `IN_PROGRESS`
-- Этап 11: `IN_PROGRESS`
+- Этап 6: `COMPLETED`
+- Этап 7: `COMPLETED`
+- Этап 8: `COMPLETED`
+- Этап 9: `COMPLETED`
+- Этап 10: `COMPLETED`
+- Этап 11: `COMPLETED`
 - Этап 12: `PLANNED`
 
 ## MCP-first опора (использовать при реализации)
