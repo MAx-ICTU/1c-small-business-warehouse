@@ -37,6 +37,17 @@ function Invoke-Git {
     return $LASTEXITCODE
 }
 
+function Test-GitRemoteExists {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$RemoteName
+    )
+
+    $git = Get-GitExe
+    & $git remote get-url $RemoteName | Out-Null
+    return ($LASTEXITCODE -eq 0)
+}
+
 function Get-GitConfigValue {
     param(
         [Parameter(Mandatory = $true)]
@@ -56,29 +67,29 @@ $repoRoot = Split-Path -Parent $repoRoot
 Set-Location $repoRoot
 
 if (-not (Test-Path -LiteralPath (Join-Path $repoRoot ".git"))) {
-    Invoke-Git -Args @("init", "-b", "main")
+    [void](Invoke-Git -Args @("init", "-b", "main"))
 }
 
 $name = Get-GitConfigValue -Args @("config", "--global", "--get", "user.name")
 $email = Get-GitConfigValue -Args @("config", "--global", "--get", "user.email")
 
 if ([string]::IsNullOrWhiteSpace($name)) {
-    Invoke-Git -Args @("config", "--local", "user.name", "MAx-ICTU")
+    [void](Invoke-Git -Args @("config", "--local", "user.name", "MAx-ICTU"))
 }
 if ([string]::IsNullOrWhiteSpace($email)) {
-    Invoke-Git -Args @("config", "--local", "user.email", "80310916+MAx-ICTU@users.noreply.github.com")
+    [void](Invoke-Git -Args @("config", "--local", "user.email", "80310916+MAx-ICTU@users.noreply.github.com"))
 }
 
 if (-not [string]::IsNullOrWhiteSpace($RemoteUrl)) {
-    $hasRemote = (Invoke-Git -Args @("remote", "get-url", $RemoteName) -AllowFail) -eq 0
+    $hasRemote = Test-GitRemoteExists -RemoteName $RemoteName
     if (-not $hasRemote) {
-        Invoke-Git -Args @("remote", "add", $RemoteName, $RemoteUrl)
+        [void](Invoke-Git -Args @("remote", "add", $RemoteName, $RemoteUrl))
     } else {
-        Invoke-Git -Args @("remote", "set-url", $RemoteName, $RemoteUrl)
+        [void](Invoke-Git -Args @("remote", "set-url", $RemoteName, $RemoteUrl))
     }
 }
 
-Invoke-Git -Args @("add", "-A")
+[void](Invoke-Git -Args @("add", "-A"))
 
 & (Get-GitExe) diff --cached --quiet
 $hasStagedChanges = $LASTEXITCODE -ne 0
@@ -87,7 +98,7 @@ if ($hasStagedChanges) {
     if ([string]::IsNullOrWhiteSpace($Message)) {
         $Message = "chore: auto sync $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
     }
-    Invoke-Git -Args @("commit", "-m", $Message)
+    [void](Invoke-Git -Args @("commit", "-m", $Message))
 } else {
     Write-Host "No staged changes. Nothing to commit."
 }
@@ -104,7 +115,7 @@ if ([string]::IsNullOrWhiteSpace($Branch) -or $Branch -eq "HEAD") {
     $Branch = "main"
 }
 
-$hasRemote = (Invoke-Git -Args @("remote", "get-url", $RemoteName) -AllowFail) -eq 0
+$hasRemote = Test-GitRemoteExists -RemoteName $RemoteName
 if (-not $hasRemote) {
     Write-Host "Remote '$RemoteName' is not configured. Set -RemoteUrl to enable push."
     exit 0
@@ -112,9 +123,9 @@ if (-not $hasRemote) {
 
 $upstreamCheck = (Invoke-Git -Args @("rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{u}") -AllowFail)
 if ($upstreamCheck -ne 0) {
-    Invoke-Git -Args @("push", "-u", $RemoteName, $Branch)
+    [void](Invoke-Git -Args @("push", "-u", $RemoteName, $Branch))
 } else {
-    Invoke-Git -Args @("push", $RemoteName, $Branch)
+    [void](Invoke-Git -Args @("push", $RemoteName, $Branch))
 }
 
 Write-Host "Sync complete."
