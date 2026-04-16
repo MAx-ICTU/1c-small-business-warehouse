@@ -1,0 +1,13 @@
+﻿{
+    "name":  "Склад",
+    "includeInCommandInterface":  true,
+    "content":  [
+                    "Catalog.Склады",
+                    "Document.ПоступлениеТоваров",
+                    "Document.ПеремещениеТоваров",
+                    "Document.СписаниеТоваров",
+                    "Document.РеализацияТоваров",
+                    "AccumulationRegister.ОстаткиТоваров",
+                    "AccumulationRegister.РезервыТоваров"
+                ]
+}

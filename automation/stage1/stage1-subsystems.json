@@ -1,0 +1,72 @@
+﻿[
+  {
+    "name": "НСИ",
+    "includeInCommandInterface": true,
+    "content": [
+      "Catalog.Номенклатура",
+      "Catalog.Склады",
+      "Catalog.Контрагенты",
+      "Catalog.Сотрудники",
+      "Catalog.ВидыЦен",
+      "InformationRegister.ЦеныНоменклатуры"
+    ]
+  },
+  {
+    "name": "Закупки",
+    "includeInCommandInterface": true,
+    "content": [
+      "Document.ПоступлениеТоваров",
+      "Catalog.Контрагенты"
+    ]
+  },
+  {
+    "name": "Продажи",
+    "includeInCommandInterface": true,
+    "content": [
+      "Document.ЗаказКлиента",
+      "Document.РеализацияТоваров",
+      "Catalog.Контрагенты",
+      "Catalog.ВидыЦен",
+      "AccumulationRegister.РезервыТоваров",
+      "Report.ПродажиЗаПериод",
+      "Report.ТопТоваров"
+    ]
+  },
+  {
+    "name": "Склад",
+    "includeInCommandInterface": true,
+    "content": [
+      "Catalog.Склады",
+      "Document.ПоступлениеТоваров",
+      "Document.ПеремещениеТоваров",
+      "Document.СписаниеТоваров",
+      "Document.РеализацияТоваров",
+      "AccumulationRegister.ОстаткиТоваров",
+      "AccumulationRegister.РезервыТоваров"
+    ]
+  },
+  {
+    "name": "Отчеты",
+    "includeInCommandInterface": true,
+    "content": [
+      "Report.ОстаткиТоваровПоСкладам",
+      "Report.ПродажиЗаПериод",
+      "Report.ТоварыВРезерве",
+      "Report.ТопТоваров"
+    ]
+  },
+  {
+    "name": "Администрирование",
+    "includeInCommandInterface": true,
+    "content": [
+      "Catalog.Сотрудники"
+    ]
+  },
+  {
+    "name": "Интеграция",
+    "includeInCommandInterface": true,
+    "content": [
+      "DataProcessor.ЗагрузкаЗаказовИзJSON"
+    ]
+  }
+]

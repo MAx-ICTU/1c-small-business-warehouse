@@ -1,0 +1,212 @@
+﻿[
+  {
+    "type": "Enum",
+    "name": "СтатусыЗаказов",
+    "values": ["Черновик", "КПодтверждению", "Подтвержден", "ВРезерве", "КОтгрузке", "Закрыт", "Отменен"]
+  },
+  {
+    "type": "Enum",
+    "name": "ВидыОперацийСклада",
+    "values": ["Приход", "Расход", "Перемещение", "Списание"]
+  },
+  {
+    "type": "Catalog",
+    "name": "Номенклатура",
+    "hierarchical": false,
+    "descriptionLength": 100,
+    "attributes": [
+      "Артикул: String(30)",
+      "ЕдиницаИзмерения: String(20)",
+      "ЭтоУслуга: Boolean",
+      "Активен: Boolean",
+      "Комментарий: String(150)"
+    ]
+  },
+  {
+    "type": "Catalog",
+    "name": "Склады",
+    "hierarchical": false,
+    "descriptionLength": 100,
+    "attributes": [
+      "Ответственный: CatalogRef.Сотрудники",
+      "Адрес: String(150)",
+      "Комментарий: String(150)"
+    ]
+  },
+  {
+    "type": "Catalog",
+    "name": "Контрагенты",
+    "hierarchical": false,
+    "descriptionLength": 100,
+    "attributes": [
+      "ИНН: String(12)",
+      "КПП: String(9)",
+      "Телефон: String(20)",
+      "Email: String(100)",
+      "Адрес: String(150)",
+      "ЭтоПоставщик: Boolean",
+      "ЭтоПокупатель: Boolean",
+      "Комментарий: String(150)"
+    ]
+  },
+  {
+    "type": "Catalog",
+    "name": "Сотрудники",
+    "hierarchical": false,
+    "descriptionLength": 100,
+    "attributes": [
+      "Должность: String(50)",
+      "Телефон: String(20)",
+      "Email: String(100)",
+      "Активен: Boolean"
+    ]
+  },
+  {
+    "type": "Catalog",
+    "name": "ВидыЦен",
+    "hierarchical": false,
+    "descriptionLength": 100,
+    "attributes": [
+      "ВалютаПредставления: String(10)",
+      "ПоУмолчанию: Boolean",
+      "Комментарий: String(150)"
+    ]
+  },
+  {
+    "type": "AccumulationRegister",
+    "name": "ОстаткиТоваров",
+    "registerType": "Balance",
+    "dimensions": [
+      "Номенклатура: CatalogRef.Номенклатура",
+      "Склад: CatalogRef.Склады"
+    ],
+    "resources": [
+      "Количество: Number(15,3)"
+    ]
+  },
+  {
+    "type": "AccumulationRegister",
+    "name": "РезервыТоваров",
+    "registerType": "Balance",
+    "dimensions": [
+      "Номенклатура: CatalogRef.Номенклатура",
+      "Склад: CatalogRef.Склады",
+      "ЗаказКлиента: DocumentRef.ЗаказКлиента"
+    ],
+    "resources": [
+      "Количество: Number(15,3)"
+    ]
+  },
+  {
+    "type": "InformationRegister",
+    "name": "ЦеныНоменклатуры",
+    "periodicity": "Second",
+    "dimensions": [
+      "Номенклатура: CatalogRef.Номенклатура",
+      "ВидЦен: CatalogRef.ВидыЦен"
+    ],
+    "resources": [
+      "Цена: Number(15,2)"
+    ]
+  },
+  {
+    "type": "Document",
+    "name": "ПоступлениеТоваров",
+    "posting": "Allow",
+    "registerRecords": ["AccumulationRegister.ОстаткиТоваров"],
+    "attributes": [
+      "Поставщик: CatalogRef.Контрагенты",
+      "Склад: CatalogRef.Склады",
+      "Ответственный: CatalogRef.Сотрудники",
+      "Комментарий: String(150)"
+    ],
+    "tabularSections": {
+      "Товары": [
+        "Номенклатура: CatalogRef.Номенклатура",
+        "Количество: Number(15,3)",
+        "Цена: Number(15,2)",
+        "Сумма: Number(15,2)"
+      ]
+    }
+  },
+  {
+    "type": "Document",
+    "name": "ЗаказКлиента",
+    "posting": "Allow",
+    "registerRecords": ["AccumulationRegister.РезервыТоваров"],
+    "attributes": [
+      "Клиент: CatalogRef.Контрагенты",
+      "Склад: CatalogRef.Склады",
+      "Ответственный: CatalogRef.Сотрудники",
+      "Статус: EnumRef.СтатусыЗаказов",
+      "ВидЦен: CatalogRef.ВидыЦен",
+      "Комментарий: String(150)"
+    ],
+    "tabularSections": {
+      "Товары": [
+        "Номенклатура: CatalogRef.Номенклатура",
+        "Количество: Number(15,3)",
+        "Цена: Number(15,2)",
+        "Сумма: Number(15,2)",
+        "КоличествоРезерв: Number(15,3)"
+      ]
+    }
+  },
+  {
+    "type": "Document",
+    "name": "РеализацияТоваров",
+    "posting": "Allow",
+    "registerRecords": ["AccumulationRegister.ОстаткиТоваров", "AccumulationRegister.РезервыТоваров"],
+    "attributes": [
+      "Клиент: CatalogRef.Контрагенты",
+      "Склад: CatalogRef.Склады",
+      "Ответственный: CatalogRef.Сотрудники",
+      "ЗаказОснование: DocumentRef.ЗаказКлиента",
+      "Комментарий: String(150)"
+    ],
+    "tabularSections": {
+      "Товары": [
+        "Номенклатура: CatalogRef.Номенклатура",
+        "Количество: Number(15,3)",
+        "Цена: Number(15,2)",
+        "Сумма: Number(15,2)"
+      ]
+    }
+  },
+  {
+    "type": "Document",
+    "name": "ПеремещениеТоваров",
+    "posting": "Allow",
+    "registerRecords": ["AccumulationRegister.ОстаткиТоваров"],
+    "attributes": [
+      "СкладОтправитель: CatalogRef.Склады",
+      "СкладПолучатель: CatalogRef.Склады",
+      "Ответственный: CatalogRef.Сотрудники",
+      "Комментарий: String(150)"
+    ],
+    "tabularSections": {
+      "Товары": [
+        "Номенклатура: CatalogRef.Номенклатура",
+        "Количество: Number(15,3)"
+      ]
+    }
+  },
+  {
+    "type": "Document",
+    "name": "СписаниеТоваров",
+    "posting": "Allow",
+    "registerRecords": ["AccumulationRegister.ОстаткиТоваров"],
+    "attributes": [
+      "Склад: CatalogRef.Склады",
+      "Ответственный: CatalogRef.Сотрудники",
+      "ПричинаСписания: String(150)",
+      "Комментарий: String(150)"
+    ],
+    "tabularSections": {
+      "Товары": [
+        "Номенклатура: CatalogRef.Номенклатура",
+        "Количество: Number(15,3)"
+      ]
+    }
+  }
+]

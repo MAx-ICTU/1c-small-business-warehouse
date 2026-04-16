@@ -1,0 +1,13 @@
+﻿{
+    "name":  "Продажи",
+    "includeInCommandInterface":  true,
+    "content":  [
+                    "Document.ЗаказКлиента",
+                    "Document.РеализацияТоваров",
+                    "Catalog.Контрагенты",
+                    "Catalog.ВидыЦен",
+                    "AccumulationRegister.РезервыТоваров",
+                    "Report.ПродажиЗаПериод",
+                    "Report.ТопТоваров"
+                ]
+}

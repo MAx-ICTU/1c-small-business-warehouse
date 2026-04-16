@@ -1,0 +1,12 @@
+﻿{
+    "type":  "Catalog",
+    "name":  "Сотрудники",
+    "hierarchical":  false,
+    "descriptionLength":  100,
+    "attributes":  [
+                       "Должность: String(50)",
+                       "Телефон: String(20)",
+                       "Email: String(100)",
+                       "Активен: Boolean"
+                   ]
+}
