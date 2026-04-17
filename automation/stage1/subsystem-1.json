@@ -1,0 +1,12 @@
+﻿{
+    "name":  "НСИ",
+    "includeInCommandInterface":  true,
+    "content":  [
+                    "Catalog.Номенклатура",
+                    "Catalog.Склады",
+                    "Catalog.Контрагенты",
+                    "Catalog.Сотрудники",
+                    "Catalog.ВидыЦен",
+                    "InformationRegister.ЦеныНоменклатуры"
+                ]
+}

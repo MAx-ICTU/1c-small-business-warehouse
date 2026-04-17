@@ -1,0 +1,10 @@
+﻿{
+    "name":  "Отчеты",
+    "includeInCommandInterface":  true,
+    "content":  [
+                    "Report.ОстаткиТоваровПоСкладам",
+                    "Report.ПродажиЗаПериод",
+                    "Report.ТоварыВРезерве",
+                    "Report.ТопТоваров"
+                ]
+}

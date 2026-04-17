@@ -1,0 +1,5 @@
+﻿{
+    "type":  "CommonModule",
+    "name":  "ОбщегоНазначения",
+    "context":  "serverClient"
+}

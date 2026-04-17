@@ -1,0 +1,12 @@
+﻿{
+    "type":  "InformationRegister",
+    "name":  "ЦеныНоменклатуры",
+    "periodicity":  "Second",
+    "dimensions":  [
+                       "Номенклатура: CatalogRef.Номенклатура",
+                       "ВидЦен: CatalogRef.ВидыЦен"
+                   ],
+    "resources":  [
+                      "Цена: Number(15,2)"
+                  ]
+}

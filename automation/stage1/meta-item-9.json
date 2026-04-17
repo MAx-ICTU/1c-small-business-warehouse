@@ -1,0 +1,13 @@
+﻿{
+    "type":  "AccumulationRegister",
+    "name":  "РезервыТоваров",
+    "registerType":  "Balance",
+    "dimensions":  [
+                       "Номенклатура: CatalogRef.Номенклатура",
+                       "Склад: CatalogRef.Склады",
+                       "ЗаказКлиента: DocumentRef.ЗаказКлиента"
+                   ],
+    "resources":  [
+                      "Количество: Number(15,3)"
+                  ]
+}

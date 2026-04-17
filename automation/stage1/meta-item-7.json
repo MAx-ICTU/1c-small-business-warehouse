@@ -1,0 +1,11 @@
+﻿{
+    "type":  "Catalog",
+    "name":  "ВидыЦен",
+    "hierarchical":  false,
+    "descriptionLength":  100,
+    "attributes":  [
+                       "ВалютаПредставления: String(10)",
+                       "ПоУмолчанию: Boolean",
+                       "Комментарий: String(150)"
+                   ]
+}

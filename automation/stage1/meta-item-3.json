@@ -1,0 +1,13 @@
+﻿{
+    "type":  "Catalog",
+    "name":  "Номенклатура",
+    "hierarchical":  false,
+    "descriptionLength":  100,
+    "attributes":  [
+                       "Артикул: String(30)",
+                       "ЕдиницаИзмерения: String(20)",
+                       "ЭтоУслуга: Boolean",
+                       "Активен: Boolean",
+                       "Комментарий: String(150)"
+                   ]
+}

@@ -1,0 +1,8 @@
+﻿{
+    "name":  "Закупки",
+    "includeInCommandInterface":  true,
+    "content":  [
+                    "Document.ПоступлениеТоваров",
+                    "Catalog.Контрагенты"
+                ]
+}

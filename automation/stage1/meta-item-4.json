@@ -1,0 +1,11 @@
+﻿{
+    "type":  "Catalog",
+    "name":  "Склады",
+    "hierarchical":  false,
+    "descriptionLength":  100,
+    "attributes":  [
+                       "Ответственный: CatalogRef.Сотрудники",
+                       "Адрес: String(150)",
+                       "Комментарий: String(150)"
+                   ]
+}

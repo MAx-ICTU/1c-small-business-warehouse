@@ -1,0 +1,7 @@
+﻿{
+    "name":  "Интеграция",
+    "includeInCommandInterface":  true,
+    "content":  [
+                    "DataProcessor.ЗагрузкаЗаказовИзJSON"
+                ]
+}

@@ -1,0 +1,7 @@
+﻿{
+    "name":  "Администрирование",
+    "includeInCommandInterface":  true,
+    "content":  [
+                    "Catalog.Сотрудники"
+                ]
+}
